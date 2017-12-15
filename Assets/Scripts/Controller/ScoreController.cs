@@ -19,6 +19,25 @@ public class ScoreController : MonoBehaviour {
     const int m_minLines = 1;
     const int m_maxLines = 4;
 
+    public Text m_hightScore;
+
+    public Text m_currentScore;
+
+    private void SetCurrentScore()
+    {
+        m_currentScore.text = "Current " + m_score;
+    }
+
+    public void UpdateHightScore()
+    {
+        SetCurrentScore();
+        if (m_score > PlayerPrefs.GetInt("HightScore", 0))
+        {
+            PlayerPrefs.SetInt("HightScore", m_score);
+            m_hightScore.text = "Best " + m_score.ToString();
+        }
+    }
+
     public void ScoreLines(int n)
     {
         m_isLevelUp = false;
@@ -54,6 +73,7 @@ public class ScoreController : MonoBehaviour {
         m_levelText.text = "lv:" + m_level.ToString();
         m_lineText.text = "line:" + m_lines.ToString();
         m_scoreText.text = FormatScore(m_score, 5);
+        m_hightScore.text = "Best " + PlayerPrefs.GetInt("HightScore", 0).ToString();
     }
 
     private string FormatScore(int score, int numberDigit)

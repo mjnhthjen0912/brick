@@ -60,6 +60,13 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     private List<Image> _pageSelectionImages;
 
     //------------------------------------------------------------------------
+
+    // 
+    public ShowSprite m_spriteLeft;
+    public ShowSprite m_spriteRight;
+    public ShowSprite m_spriteTop;
+    public ShowSprite m_spriteDown;
+
     void Start() {
         _scrollRectComponent = GetComponent<ScrollRect>();
         _scrollRectRect = GetComponent<RectTransform>();
@@ -90,7 +97,10 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
 
         if (prevButton)
             prevButton.GetComponent<Button>().onClick.AddListener(() => { PreviousScreen(); });
-	}
+
+        ///
+        m_spriteLeft.isStart = true;
+    }
 
     //------------------------------------------------------------------------
     void Update() {
@@ -168,6 +178,17 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         aPageIndex = Mathf.Clamp(aPageIndex, 0, _pageCount - 1);
         _container.anchoredPosition = _pagePositions[aPageIndex];
         _currentPage = aPageIndex;
+        
+    }
+
+    private void SetIsStart(ShowSprite currentSprite)
+    {
+        m_spriteLeft.isStart = false;
+        m_spriteRight.isStart = false;
+        m_spriteTop.isStart = false;
+        m_spriteDown.isStart = false;
+
+        currentSprite.isStart = true;
     }
 
     //------------------------------------------------------------------------
@@ -176,6 +197,28 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         _lerpTo = _pagePositions[aPageIndex];
         _lerp = true;
         _currentPage = aPageIndex;
+
+        // 
+        Debug.Log(aPageIndex);
+        if (m_spriteLeft != null)
+        {
+            if (aPageIndex == 0)
+            {
+                SetIsStart(m_spriteLeft);
+            }
+            else if (aPageIndex == 1)
+            {
+                SetIsStart(m_spriteRight);
+            }
+            else if (aPageIndex == 2)
+            {
+                SetIsStart(m_spriteTop);
+            }
+            else if (aPageIndex == 3)
+            {
+                SetIsStart(m_spriteDown);
+            }
+        }
     }
 
     //------------------------------------------------------------------------
@@ -221,6 +264,7 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         _pageSelectionImages[aPageIndex].SetNativeSize();
 
         _previousPageSelectionIndex = aPageIndex;
+        
     }
 
     //------------------------------------------------------------------------

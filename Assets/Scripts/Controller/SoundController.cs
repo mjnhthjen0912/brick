@@ -97,13 +97,4 @@ public class SoundController : MonoBehaviour {
             Debug.Log("WARNING ToogleIcon fx not found!");
         }
     }
-
-    // Use this for initialization
-    void Start () {
-        //PlayBackgorundMusic(GetOneRandomAudioClip(m_audioClips));
-    }
-	
-	// Update is called once per frame
-	void Update () {
-    }
 }

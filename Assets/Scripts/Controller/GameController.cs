@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    string m_scenseName = "test";
+    public string m_scenseName = "game";
 
     Board m_board;
     Spawner m_spawner;
@@ -58,7 +58,7 @@ public class GameController : MonoBehaviour
     public Background m_Background;
 
     public ThemeController m_themeController;
-    
+
     // Use this for initialization
     void Start ()
 	{
@@ -285,6 +285,7 @@ public class GameController : MonoBehaviour
         Debug.Log("game over");
         if (!m_isGamePlaying)
         {
+            m_scoreController.UpdateHightScore();
             m_gameOverPanel.SetActive(true);
         }
         PlaySoundFx(m_soundController.m_gameOverSound, 5f);
