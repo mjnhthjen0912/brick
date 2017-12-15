@@ -12,7 +12,7 @@ public class ShowSprite : MonoBehaviour {
     public string m_strSprite = "tut1-";
     private int m_idxSpriteCurrent = 0;
     public bool isStart = false;
-    private Sprite[] m_sprite = new Sprite[23];
+    private Sprite[] m_sprite = new Sprite[12];
 
     private void Awake()
     {
@@ -32,7 +32,7 @@ public class ShowSprite : MonoBehaviour {
             if (m_timeToNext + m_prioNext < Time.time)
             {
                 m_timeToNext = Time.time;
-                if(m_idxSpriteCurrent <= 22)
+                if(m_idxSpriteCurrent <= 11)
                 {
                     if (m_sprite[m_idxSpriteCurrent] == null)
                     {
@@ -45,7 +45,7 @@ public class ShowSprite : MonoBehaviour {
                 }
                 
                 m_idxSpriteCurrent++;
-                if (m_idxSpriteCurrent > 30)
+                if (m_idxSpriteCurrent > 20)
                 {
                     m_idxSpriteCurrent = 0;
                 }
