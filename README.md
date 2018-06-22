@@ -1,5 +1,5 @@
 # Game brick
-Giống như game tetris
+Giống như game tetris.
 Được viết trên framework unity
 
 # Các chức năng
